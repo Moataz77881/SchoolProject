@@ -2,6 +2,8 @@
 using SchoolProject.Infrustructure.DbContect;
 using SchoolProject.Infrustructure.Implementation;
 using SchoolProject.Infrustructure.Repositories;
+using SchoolProject.Service.StudentServices.Implementation;
+using SchoolProject.Service.StudentServices.Interfaces;
 
 namespace SchoolProject.Configurations
 {
@@ -17,6 +19,8 @@ namespace SchoolProject.Configurations
 			#endregion
 
 			builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+			builder.Services.AddScoped<IStudentService, StudentService>();
+
 
 			return builder;
 		}
