@@ -10,6 +10,7 @@ namespace SchoolProject.Infrustructure.Implementation
 		#region Fields
 		private readonly ApplicationDbContext _context;
 		#endregion
+
 		#region constructor
 		public StudentRepository(ApplicationDbContext context)
 		{
@@ -20,7 +21,14 @@ namespace SchoolProject.Infrustructure.Implementation
 		#region GetStudentListAsync method
 		public async Task<List<Student>> GetStudentListAsync()
 		{
-			return await _context.Students.ToListAsync();
+			return await _context.Students.Include(x=>x.Department).Include(y=>y.Subjects).ToListAsync();
+		}
+		#endregion
+
+		#region setStudentDepartmentSubject
+		public async Task setStudentDepartmentSubject(Student student)
+		{
+			await _context.Students.AddRangeAsync(student);
 		}
 		#endregion
 	}

@@ -10,6 +10,7 @@ namespace SchoolProject.Core.StudentCQRS.Handler
 		#region fields
 		private readonly IStudentService _studentService;
 		#endregion
+
 		#region Constructor
 		public StudentHandler(IStudentService studentService)
 		{
@@ -21,18 +22,25 @@ namespace SchoolProject.Core.StudentCQRS.Handler
 		public async Task<List<StudentDto>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
 		{
 			List<StudentDto> studentDtos = new List<StudentDto>();
+			List<StudentSubjectDto> studentSubjectDtos = new List<StudentSubjectDto>();
+			var students = await _studentService.GetStudentListAsync();
 
-			var Students = await _studentService.GetStudentListAsync();
-
-			foreach (var student in Students) 
+			foreach (var student in students) 
 			{
-				studentDtos.Add(new StudentDto 
+				studentDtos.Add(new StudentDto
 				{
 					Name = student.Name,
 					Address = student.Address,
 					Phone = student.Phone,
-					Department = student.Department,
-					Subjects = student.Subjects,
+					DepartmentDto = new DepartmentDto()
+					{
+						DepName = student.Department.DepName
+					},
+					studentSubjectDtos = student.Subjects.Select(ss => new StudentSubjectDto
+					{
+						SubName = ss.SubName,
+						Priod = ss.Priod
+					}).ToList()
 				});
 			}
 			return studentDtos;

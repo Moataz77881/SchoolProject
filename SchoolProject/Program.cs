@@ -10,7 +10,7 @@ namespace SchoolProject
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder = Config.AddConfigServices(builder);
+            builder= builder.AddConfigServices();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -22,7 +22,9 @@ namespace SchoolProject
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                
             }
+           
 
             app.UseHttpsRedirection();
 
