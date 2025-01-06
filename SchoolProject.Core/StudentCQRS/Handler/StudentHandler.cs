@@ -1,11 +1,12 @@
 ﻿using MediatR;
+using SchoolProject.Core.ResponseOBJ;
 using SchoolProject.Core.StudentCQRS.Queries;
 using SchoolProject.Data.DTOs;
 using SchoolProject.Service.StudentServices.Interfaces;
 
 namespace SchoolProject.Core.StudentCQRS.Handler
 {
-	public class StudentHandler : IRequestHandler<GetStudentListQuery, List<StudentDto>>
+	public class StudentHandler : ResponseHandler, IRequestHandler<GetStudentListQuery,Response<List<StudentDto>>>
 	{
 		#region fields
 		private readonly IStudentService _studentService;
@@ -19,7 +20,7 @@ namespace SchoolProject.Core.StudentCQRS.Handler
 		#endregion
 
 		#region Implement Handler
-		public async Task<List<StudentDto>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
+		public async Task<Response<List<StudentDto>>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
 		{
 			List<StudentDto> studentDtos = new List<StudentDto>();
 			List<StudentSubjectDto> studentSubjectDtos = new List<StudentSubjectDto>();
@@ -43,7 +44,7 @@ namespace SchoolProject.Core.StudentCQRS.Handler
 					}).ToList()
 				});
 			}
-			return studentDtos;
+			return Success(studentDtos);
 		}
 		#endregion
 	}
