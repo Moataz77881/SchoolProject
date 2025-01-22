@@ -23,10 +23,12 @@ namespace SchoolProject.Configurations
 			#region Dependency injection
 			builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 			builder.Services.AddScoped<IStudentService, StudentService>();
+			builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(ImpelementGenericRepo<>));
 			#endregion
 
 			#region Mediator Configuration
-			builder.Services.AddMediatR(r => r.RegisterServicesFromAssemblies(typeof(GetStudentListQuery).Assembly));
+			builder.Services.AddMediatR(r => r.RegisterServicesFromAssemblies(typeof(GetStudentListQuery).Assembly,
+				typeof(GetStudentByIdQuery).Assembly));
 			#endregion
 
 			return builder;

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace SchoolProject.Core.ResponseOBJ
+namespace SchoolProject.Core.Response
 {
 	public class Response<T>
 	{

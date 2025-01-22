@@ -22,6 +22,8 @@ namespace SchoolProject
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+
+                
                 
             }
            

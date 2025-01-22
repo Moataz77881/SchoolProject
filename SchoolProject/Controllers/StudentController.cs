@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Core.StudentCQRS.Queries;
 
@@ -23,9 +21,16 @@ namespace SchoolProject.Controllers
 
 		#region EndPoint
 		[HttpGet]
-		public async Task<IActionResult> Get() 
+		public async Task<IActionResult> GetStudentList() 
 		{
 			return Ok(await _mediator.Send(new GetStudentListQuery()));
+		}
+
+		[Route("{id:int}")]
+		[HttpGet]
+		public async Task<IActionResult> GetStudentById([FromRoute] int id) 
+		{
+			return Ok(await _mediator.Send(new GetStudentByIdQuery(id)));
 		}
 		#endregion
 	}

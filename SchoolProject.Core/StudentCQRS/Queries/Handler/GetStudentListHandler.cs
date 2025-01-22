@@ -1,21 +1,21 @@
 ﻿using MediatR;
-using SchoolProject.Core.ResponseOBJ;
+using SchoolProject.Core.Response;
 using SchoolProject.Core.StudentCQRS.Queries;
 using SchoolProject.Data.DTOs;
 using SchoolProject.Service.StudentServices.Interfaces;
 
-namespace SchoolProject.Core.StudentCQRS.Handler
+namespace SchoolProject.Core.StudentCQRS.Queries.Handler
 {
-	public class StudentHandler : ResponseHandler, IRequestHandler<GetStudentListQuery,Response<List<StudentDto>>>
+	public class GetStudentListHandler : ResponseHandler, IRequestHandler<GetStudentListQuery, Response<List<StudentDto>>>
 	{
 		#region fields
 		private readonly IStudentService _studentService;
 		#endregion
 
 		#region Constructor
-		public StudentHandler(IStudentService studentService)
+		public GetStudentListHandler(IStudentService studentService)
 		{
-			this._studentService = studentService;
+			_studentService = studentService;
 		}
 		#endregion
 
@@ -26,7 +26,7 @@ namespace SchoolProject.Core.StudentCQRS.Handler
 			List<StudentSubjectDto> studentSubjectDtos = new List<StudentSubjectDto>();
 			var students = await _studentService.GetStudentListAsync();
 
-			foreach (var student in students) 
+			foreach (var student in students)
 			{
 				studentDtos.Add(new StudentDto
 				{

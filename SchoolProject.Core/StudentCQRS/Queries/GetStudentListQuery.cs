@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using SchoolProject.Core.ResponseOBJ;
+using SchoolProject.Core.Response;
 using SchoolProject.Data.DTOs;
 using SchoolProject.Data.Models;
 

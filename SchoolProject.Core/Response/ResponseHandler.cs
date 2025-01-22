@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.ResponseOBJ
+﻿namespace SchoolProject.Core.Response
 {
 	public class ResponseHandler
 	{
